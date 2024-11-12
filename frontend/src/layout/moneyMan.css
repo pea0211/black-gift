@@ -1,0 +1,82 @@
+body {
+    font-family: Arial, sans-serif;
+}
+h2 {
+    color: #333;
+}
+.filter-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+.filter-container label {
+    margin-right: 10px;
+    font-weight: bold;
+}
+select, input[type="date"] {
+    padding: 5px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+th, td {
+    padding: 10px;
+    border: 1px solid #ddd;
+    text-align: center; /* Căn chữ theo chiều ngang */
+    vertical-align: middle; /* Căn chữ theo chiều dọc */
+}
+th {
+    background-color: #f8f8f8;
+    font-weight: bold;
+}
+.pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+.pagination button {
+    padding: 8px 16px;
+    margin: 0 2px;
+    border: none;
+    background-color: #f2f2f2;
+    cursor: pointer;
+}
+.pagination button.active {
+    background-color: #4CAF50;
+    color: white;
+}
+.pagination button:hover:not(.active) {
+    background-color: #ddd;
+}
+
+.tag {
+    display: inline-flex; /* Make it inline-block for tags */
+    align-items: center; /* Center items vertically */
+    padding: 0.2rem 0.5rem; /* Padding for the tag */
+    border-radius: 0.2rem; /* Slightly rounded corners */
+    margin-right: 0.5rem; /* Space between tags */
+    font-size: 0.9rem; /* Font size */
+}
+
+.tag-completed {
+    border: 1px solid #28a745; /* Green border */
+    color: #fff; /* Green text */
+    background:#28a745;
+}
+
+.tag-processing {
+    border: 1px solid #ffc107; /* Yellow border */
+    color: #fff; /* Yellow text */
+    background:#ffc107;
+}
+
+.tag-pending {
+    border: 1px solid #dc3545; /* Red border */
+    color: #fff; /* Red text */
+    background:#dc3545;
+}
