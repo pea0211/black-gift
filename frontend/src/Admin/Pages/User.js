@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { Table, Modal, Button, Select, Input, Pagination } from 'antd';
 import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 const { Option } = Select;
-import { useNavigate } from "react-router-dom";
+
 
 export default function User() {
     const navigate = useNavigate();
