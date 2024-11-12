@@ -15,6 +15,15 @@ export default function Shop() {
     const [sortedProducts, setSortedProducts] = useState([...products]); // Sản phẩm đã sắp xếp
     const userEmail = localStorage.getItem('userEmail');
     const [searchTerm, setSearchTerm] = useState(''); 
+    const navigate = useNavigate();
+    useEffect(() => {
+        // Kiểm tra token trong localStorage
+        const isLoggedIn = localStorage.getItem('isLoggedIn');
+        if (isLoggedIn == 'false') {
+            // Nếu không có token, chuyển hướng về trang đăng nhập
+            navigate('/dang-nhap');
+        }
+    }, []);
     useEffect(() => {
         const fetchProducts = async () => {
           try {
