@@ -14,7 +14,7 @@ export default function User() {
         // Lấy danh sách người dùng từ backend
         const fetchUsers = async () => {
           try {
-            const response = await axios.get("http://localhost:5000/api/admin/user");
+            const response = await axios.get("http://15.235.155.26:5000/api/admin/user");
             console.log(response.data);
             setUsers(response.data);
           } catch (error) {

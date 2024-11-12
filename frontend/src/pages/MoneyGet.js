@@ -21,7 +21,7 @@ export default function MoneyGet() {
       console.log(requestData);
 
       // Gửi yêu cầu nạp tiền đến server
-      const response = await axios.post('http://localhost:5000/api/rut-tien', requestData);
+      const response = await axios.post('http://15.235.155.26:5000/api/rut-tien', requestData);
       alert(response.data.message || "Yêu cầu rút tiền đã được gửi thành công!");
       navigate('/ls-rut-tien'); // Điều hướng về trang chủ sau khi thành công
     } catch (error) {
@@ -36,7 +36,7 @@ export default function MoneyGet() {
   useEffect(() => {	
     const fetchUserBalance = async () => {
       try {
-        const response = await axios.get(`http://localhost:5000/api/user-balance/${userEmail}`);
+        const response = await axios.get(`http://15.235.155.26:5000/api/user-balance/${userEmail}`);
         console.log(response.data);
         setUserBalance(response.data);
       } catch (error) {

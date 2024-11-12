@@ -12,7 +12,7 @@ export default function ProductDetail() {
 		
 		const fetchData = async () => {
 		  try {
-			const response = await axios.get(`http://localhost:5000/api/box-detail/${id}`);
+			const response = await axios.get(`http://15.235.155.26:5000/api/box-detail/${id}`);
 			setGiftData(response.data);
 			console.log(response.data);
 		  } catch (error) {
@@ -25,7 +25,7 @@ export default function ProductDetail() {
 
 	const handleAddToCart = async () => {
         try {
-            const response = await axios.post('http://localhost:5000/api/add-to-cart', {
+            const response = await axios.post('http://15.235.155.26:5000/api/add-to-cart', {
                 email: userEmail,
                 giftboxId: giftData.id,
             });

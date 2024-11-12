@@ -20,7 +20,7 @@ export default function Transfer() {
   useEffect(() => {	
     const fetchTransactions = async () => {
       try {
-        const response = await axios.get(`http://localhost:5000/api/admin/nap-tien`);
+        const response = await axios.get(`http://15.235.155.26:5000/api/admin/nap-tien`);
         console.log(response.data);
 
         // Sắp xếp các giao dịch theo thứ tự thời gian giảm dần (mới nhất đến cũ nhất)
@@ -68,7 +68,7 @@ export default function Transfer() {
         status: updatedStatus
       }
       // Gửi yêu cầu cập nhật đến backend
-      const response = await axios.post(`http://localhost:5000/api/admin/update-nap-tien/${selectedTransaction.in_code}`, {
+      const response = await axios.post(`http://15.235.155.26:5000/api/admin/update-nap-tien/${selectedTransaction.in_code}`, {
         status: updatedStatus,
       });
 

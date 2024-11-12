@@ -37,7 +37,7 @@ export default function OrderAll() {
   useEffect(() => {	
     const fetchData = async () => {
       try {
-        const response = await axios.get(`http://localhost:5000/api/box-order/${userEmail}`);
+        const response = await axios.get(`http://15.235.155.26:5000/api/box-order/${userEmail}`);
         console.log(response.data);
 
         // Sắp xếp các giao dịch theo thứ tự thời gian giảm dần (mới nhất đến cũ nhất)

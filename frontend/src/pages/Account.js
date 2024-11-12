@@ -30,7 +30,7 @@ const Account = () => {
 		// Gửi yêu cầu lấy thông tin người dùng
 		const fetchUserData = async () => {
 		  try {
-			const response = await axios.get(`http://localhost:5000/api/user-profile/${userEmail}`);
+			const response = await axios.get(`http://15.235.155.26:5000/api/user-profile/${userEmail}`);
         	console.log(response.data);
         	setUserData(response.data);
 		  } catch (error) {
@@ -68,7 +68,7 @@ const Account = () => {
 		  const userEmail = localStorage.getItem("userEmail");
 	
 		  // Gửi yêu cầu đến backend để cập nhật mật khẩu
-		  const response = await axios.post("http://localhost:5000/api/change-password", {
+		  const response = await axios.post("http://15.235.155.26:5000/api/change-password", {
 			email: userEmail,
 			oldPassword,
 			newPassword
@@ -85,7 +85,7 @@ const Account = () => {
 		e.preventDefault();
 		try {
 		  //userData.email = userEmail;
-		  const response = await axios.post("http://localhost:5000/api/update-profile", userData);
+		  const response = await axios.post("http://15.235.155.26:5000/api/update-profile", userData);
 		  alert(response.data.message);
 		  //navigate("/account");
 		} catch (error) {
