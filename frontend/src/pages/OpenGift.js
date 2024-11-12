@@ -6,6 +6,14 @@ import bannerBg from '../img/banner-bg.jpg'
 import axios from "axios";
 
 export default function OpenGift() {
+    useEffect(() => {
+        // Kiểm tra token trong localStorage
+        const isLoggedIn = localStorage.getItem('userEmail');
+        if (!isLoggedIn) {
+            // Nếu không có token, chuyển hướng về trang đăng nhập
+            navigate('/dang-nhap');
+        }
+    }, []);
     const { id } = useParams();
     const [openGift, setOpenGift] = useState(true);
 

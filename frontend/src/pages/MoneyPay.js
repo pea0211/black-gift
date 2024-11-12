@@ -7,6 +7,14 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 export default function MoneyPay() {
+  useEffect(() => {
+    // Kiểm tra token trong localStorage
+    const isLoggedIn = localStorage.getItem('userEmail');
+    if (!isLoggedIn) {
+        // Nếu không có token, chuyển hướng về trang đăng nhập
+        navigate('/dang-nhap');
+    }
+}, []);
   const [transferData, setTransferData] = useState({});
   const [userBalance, setUserBalance] = useState("");
   const navigate = useNavigate(); // Để điều hướng sau khi nạp tiền thành công

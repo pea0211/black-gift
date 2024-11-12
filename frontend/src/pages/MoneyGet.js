@@ -9,6 +9,14 @@ import { useNavigate } from "react-router-dom";
 const { Option } = Select;
 
 export default function MoneyGet() {
+  useEffect(() => {
+    // Kiểm tra token trong localStorage
+    const isLoggedIn = localStorage.getItem('userEmail');
+    if (!isLoggedIn) {
+        // Nếu không có token, chuyển hướng về trang đăng nhập
+        navigate('/dang-nhap');
+    }
+}, []);
   const handleFinish = async(values) => {
     try { 
       const requestData = {

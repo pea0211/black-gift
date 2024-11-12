@@ -8,6 +8,14 @@ import { useNavigate } from "react-router-dom";
 import moment from "moment"; // Thêm moment.js để xử lý ngày
 
 export default function OrderAll() {
+  useEffect(() => {
+    // Kiểm tra token trong localStorage
+    const isLoggedIn = localStorage.getItem('userEmail');
+    if (!isLoggedIn) {
+        // Nếu không có token, chuyển hướng về trang đăng nhập
+        navigate('/dang-nhap');
+    }
+}, []);
   const columns = [
     { title: 'Mã hộp quà', dataIndex: 'id', key: 'id' },
     { title: 'Tên hộp quà', dataIndex: 'name', key: 'name' },

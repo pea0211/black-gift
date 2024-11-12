@@ -6,6 +6,14 @@ import { Link } from 'react-router-dom';
 import { useNavigate } from "react-router-dom";
 
 const Account = () => {
+	useEffect(() => {
+        // Kiểm tra token trong localStorage
+        const isLoggedIn = localStorage.getItem('userEmail');
+        if (!isLoggedIn) {
+            // Nếu không có token, chuyển hướng về trang đăng nhập
+            navigate('/dang-nhap');
+        }
+    }, []);
 	const navigate = useNavigate();
 	const [userData, setUserData] = useState({
 		email:"",

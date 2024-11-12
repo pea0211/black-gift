@@ -8,6 +8,14 @@ const { Title } = Typography;
 const { Option } = Select;
 
 export default function AdminInfor() {
+  useEffect(() => {
+    // Kiểm tra token trong localStorage
+    const isLoggedIn = localStorage.getItem('userEmail');
+    if (!isLoggedIn) {
+        // Nếu không có token, chuyển hướng về trang đăng nhập
+        navigate('/dang-nhap');
+    }
+}, []);
   const handleSubmit = (values) => {
     console.log('Form values:', values);
     // Here you can handle the form submission, such as sending the data to your backend.

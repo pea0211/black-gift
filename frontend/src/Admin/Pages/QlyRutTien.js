@@ -6,6 +6,14 @@ import moment from "moment"; // Thêm moment.js để xử lý ngày
 const { Option } = Select;
 
 export default function QlyRutTien() {
+  useEffect(() => {
+    // Kiểm tra token trong localStorage
+    const isLoggedIn = localStorage.getItem('userEmail');
+    if (!isLoggedIn) {
+        // Nếu không có token, chuyển hướng về trang đăng nhập
+        navigate('/dang-nhap');
+    }
+}, []);
   const [transactions, setTransactions] = useState([]);
   const [filteredTransactions, setFilteredTransactions] = useState([]);
   const [filterStatus, setFilterStatus] = useState("All");

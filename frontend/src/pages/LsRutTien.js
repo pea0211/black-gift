@@ -10,6 +10,14 @@ import moment from "moment"; // Thêm moment.js để xử lý ngày
 const { Option } = Select;
 
 export default function LsRutTien() {
+  useEffect(() => {
+    // Kiểm tra token trong localStorage
+    const isLoggedIn = localStorage.getItem('userEmail');
+    if (!isLoggedIn) {
+        // Nếu không có token, chuyển hướng về trang đăng nhập
+        navigate('/dang-nhap');
+    }
+}, []);
   const [userBalance, setUserBalance] = useState("");
   const navigate = useNavigate(); // Để điều hướng sau khi nạp tiền thành công
   const userEmail = localStorage.getItem("userEmail"); // Lấy email từ localStorage

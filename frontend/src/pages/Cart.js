@@ -7,6 +7,14 @@ import axios from 'axios';
 import { Table, Button, Modal, Form, Input, Select, DatePicker } from 'antd';
 import { useNavigate } from "react-router-dom";
 export default function Cart() {
+    useEffect(() => {
+        // Kiểm tra token trong localStorage
+        const isLoggedIn = localStorage.getItem('userEmail');
+        if (!isLoggedIn) {
+            // Nếu không có token, chuyển hướng về trang đăng nhập
+            navigate('/dang-nhap');
+        }
+    }, []);
 	const [cartItems, setCartItems] = useState([]);
     const [totalAmount, setTotalAmount] = useState(0);
 	const userEmail = localStorage.getItem("userEmail"); 

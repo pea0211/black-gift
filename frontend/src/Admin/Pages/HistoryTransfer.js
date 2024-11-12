@@ -10,6 +10,14 @@ const { RangePicker } = DatePicker;
 const { Title } = Typography;
 
 export default function HistoryTransfer() {
+    useEffect(() => {
+        // Kiểm tra token trong localStorage
+        const isLoggedIn = localStorage.getItem('userEmail');
+        if (!isLoggedIn) {
+            // Nếu không có token, chuyển hướng về trang đăng nhập
+            navigate('/dang-nhap');
+        }
+    }, []);
     const [statusFilter, setStatusFilter] = useState('All');
     const [dateRange, setDateRange] = useState([null, null]);
     const [currentPage, setCurrentPage] = useState(1);
