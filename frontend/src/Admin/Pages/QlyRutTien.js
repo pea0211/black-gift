@@ -20,7 +20,7 @@ export default function QlyRutTien() {
   useEffect(() => {	
     const fetchTransactions = async () => {
       try {
-        const response = await axios.get(`http://localhost:5000/admin/rut-tien`);
+        const response = await axios.get(`http://localhost:5000/api/admin/rut-tien`);
         console.log(response.data);
         // Sắp xếp các giao dịch theo thứ tự thời gian giảm dần (mới nhất đến cũ nhất)
         const sortedTransactions = response.data.sort((a, b) => {
@@ -67,7 +67,7 @@ export default function QlyRutTien() {
         status: updatedStatus
       }
       // Gửi yêu cầu cập nhật đến backend
-      const response = await axios.post(`http://localhost:5000/admin/update-rut-tien/${selectedTransaction.id}`, {
+      const response = await axios.post(`http://localhost:5000/api/admin/update-rut-tien/${selectedTransaction.id}`, {
         status: updatedStatus,
       });
 

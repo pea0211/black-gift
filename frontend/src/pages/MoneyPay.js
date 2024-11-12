@@ -15,7 +15,7 @@ export default function MoneyPay() {
   useEffect(() => {	
     const fetchUserBalance = async () => {
       try {
-        const response = await axios.get(`http://localhost:5000/user-balance/${userEmail}`);
+        const response = await axios.get(`http://localhost:5000/api/user-balance/${userEmail}`);
         console.log(response.data);
         setUserBalance(response.data);
       } catch (error) {
@@ -30,7 +30,7 @@ export default function MoneyPay() {
 		// Gửi yêu cầu lấy thông tin người dùng
 		const fetchTransferData = async () => {
 		  try {
-			const response = await axios.get(`http://localhost:5000/admin/bank-account/${email}`);
+			const response = await axios.get(`http://localhost:5000/api/admin/bank-account/${email}`);
         	console.log(response.data);
         	setTransferData(response.data);
 		  } catch (error) {
@@ -72,7 +72,7 @@ export default function MoneyPay() {
       console.log(requestData);
 
       // Gửi yêu cầu nạp tiền đến server
-      const response = await axios.post('http://localhost:5000/nap-tien', requestData);
+      const response = await axios.post('http://localhost:5000/api/nap-tien', requestData);
       alert(response.data.message || "Yêu cầu nạp tiền đã được gửi thành công!");
       navigate('/money-man'); // Điều hướng về trang chủ sau khi thành công
     } catch (error) {

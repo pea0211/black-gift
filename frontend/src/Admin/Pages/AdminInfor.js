@@ -35,7 +35,7 @@ export default function AdminInfor() {
 		// Gửi yêu cầu lấy thông tin người dùng
 		const fetchAdminData = async () => {
 		  try {
-			const response = await axios.get(`http://localhost:5000/admin/bank-account/${userEmail}`);
+			const response = await axios.get(`http://localhost:5000/api/admin/bank-account/${userEmail}`);
         	console.log(response.data);
         	setAdminData(response.data);
 		  } catch (error) {
@@ -70,7 +70,7 @@ export default function AdminInfor() {
 	
 		try {	
 		  // Gửi yêu cầu đến backend để cập nhật mật khẩu
-		  const response = await axios.post("http://localhost:5000/change-password", {
+		  const response = await axios.post("http://localhost:5000/api/change-password", {
 			email: userEmail,
 			oldPassword,
 			newPassword
@@ -87,7 +87,7 @@ export default function AdminInfor() {
 		e.preventDefault();
 		try {
 		  adminData.email = userEmail;
-		  const response = await axios.post("http://localhost:5000/admin/update-bank", adminData);
+		  const response = await axios.post("http://localhost:5000/api/admin/update-bank", adminData);
 		  alert(response.data.message);
 		  //navigate("/account");
 		} catch (error) {

@@ -32,7 +32,7 @@ export default function HistoryTransfer() {
     useEffect(() => {	
         const fetchTransactions = async () => {
           try {
-            const response = await axios.get(`http://localhost:5000/admin/box-order`);
+            const response = await axios.get(`http://localhost:5000/api/admin/box-order`);
             console.log(response.data);
             // Sắp xếp các giao dịch theo thứ tự thời gian giảm dần (mới nhất đến cũ nhất)
             const sortedTransactions = response.data.sort((a, b) => {
@@ -133,7 +133,7 @@ export default function HistoryTransfer() {
                     <Table.Column title="Ngày Mở Hộp Quà" dataIndex="NgayMo" />
                     <Table.Column title="Vật Phẩm Mở Được" dataIndex="product" />
                     <Table.Column title="Hình ảnh" dataIndex="image" 
-                        render= {(text) => <img src={`http://localhost:5000${text}`} alt="Product" style={{ width: 50, height: 50 }} />}
+                        render= {(text) => <img src={`http://localhost:5000/api${text}`} alt="Product" style={{ width: 50, height: 50 }} />}
                     />
                     <Table.Column title="Giá Trị Vật Phẩm (VNĐ)" dataIndex="real_value" 
                         render={(value) => {

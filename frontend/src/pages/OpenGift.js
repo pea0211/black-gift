@@ -13,7 +13,7 @@ export default function OpenGift() {
     useEffect(() => {
 		const fetchData = async () => {
 		  try {
-			const response = await axios.get(`http://localhost:5000/box-detail/${id}`);
+			const response = await axios.get(`http://localhost:5000/api/box-detail/${id}`);
 			setGiftData(response.data);
 			console.log(response.data);
 		  } catch (error) {
@@ -29,7 +29,7 @@ export default function OpenGift() {
         setOpenGift(false);
         try {
           // Gửi yêu cầu cập nhật đến backend
-          const response = await axios.post(`http://localhost:5000/open-gift/${id}`);
+          const response = await axios.post(`http://localhost:5000/api/open-gift/${id}`);
     
           if (response.data.success) {
             alert(response.data.message || "Mở hộp quà thành công!");
@@ -85,7 +85,7 @@ export default function OpenGift() {
                         <img id="giftImage" src={Dong} alt="Hộp Quà" className="gift-image" onClick={handleOpenGift}/>
                         : 
                         <>
-                            <img id="giftImage" src={`http://localhost:5000${giftData.image}`} alt="Hộp Quà" className="gift-image"/>
+                            <img id="giftImage" src={`http://localhost:5000/api${giftData.image}`} alt="Hộp Quà" className="gift-image"/>
                         </> 
                         }
                         

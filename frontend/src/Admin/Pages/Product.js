@@ -32,7 +32,7 @@ export default function Product() {
     useEffect(() => {
         const fetchProducts = async () => {
           try {
-            const response = await axios.get(`http://localhost:5000/admin/giftbox`);
+            const response = await axios.get(`http://localhost:5000/api/admin/giftbox`);
             console.log(response.data);
             setProducts(response.data);
             setFilteredProducts(response.data); // Khởi tạo dữ liệu lọc ban đầu
@@ -117,7 +117,7 @@ export default function Product() {
         formData.append("image", image);
         formData.append("real_value", real_value);
         try {
-          const response = await axios.post('http://localhost:5000/new-giftbox', formData, {
+          const response = await axios.post('http://localhost:5000/api/new-giftbox', formData, {
             headers: {
               'Content-Type': 'multipart/form-data',
             },
@@ -142,7 +142,7 @@ export default function Product() {
         setPrice(product.price || '');
         setProduct(product.product || '');
         setImage(product.image || '');
-        setImageURL(product.image ? `http://localhost:5000${product.image}` : null);
+        setImageURL(product.image ? `http://localhost:5000/api${product.image}` : null);
         setReal_Value(product.real_value || '');
         setShowEditModal(true); // Hiển thị modal chỉnh sửa
         setSelectedProductStatus(product.status);
@@ -162,7 +162,7 @@ export default function Product() {
         formData.append("real_value", real_value);
     
         try {
-            const response = await axios.post(`http://localhost:5000/edit-giftbox/${editingProductId}`, formData, {
+            const response = await axios.post(`http://localhost:5000/api/edit-giftbox/${editingProductId}`, formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                 },
@@ -181,7 +181,7 @@ export default function Product() {
     const handleDelete = async (id) => {
         if (window.confirm('Bạn có chắc chắn muốn xóa hộp quà này?')) {
             try {
-                const response = await axios.delete(`http://localhost:5000/delete-giftbox/${id}`);
+                const response = await axios.delete(`http://localhost:5000/api/delete-giftbox/${id}`);
                 alert(response.data.message);
                 // Cập nhật danh sách sản phẩm sau khi xóa
                 setProducts(products.filter(product => product.id !== id));
@@ -246,7 +246,7 @@ export default function Product() {
                         {
                             title: 'Hình ảnh',
                             dataIndex: 'image',
-                            render: (text) => <img src={`http://localhost:5000${text}`} alt="Product" style={{ width: 50, height: 50 }} />,
+                            render: (text) => <img src={`http://localhost:5000/api${text}`} alt="Product" style={{ width: 50, height: 50 }} />,
                         },
                         { title: 'Giá trị vật phẩm (VND)', dataIndex: 'real_value',
                             render: (real_value) => {

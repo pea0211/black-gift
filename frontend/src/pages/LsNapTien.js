@@ -21,7 +21,7 @@ export default function MoneyMan() {
   useEffect(() => {	
     const fetchUserBalance = async () => {
       try {
-        const response = await axios.get(`http://localhost:5000/user-balance/${userEmail}`);
+        const response = await axios.get(`http://localhost:5000/api/user-balance/${userEmail}`);
         console.log(response.data);
         setUserBalance(response.data);
       } catch (error) {
@@ -30,7 +30,7 @@ export default function MoneyMan() {
     };
     const fetchTransactions = async () => {
       try {
-        const response = await axios.get(`http://localhost:5000/ls-nap-tien/${userEmail}`);
+        const response = await axios.get(`http://localhost:5000/api/ls-nap-tien/${userEmail}`);
         console.log(response.data);
         // Sắp xếp các giao dịch theo thứ tự thời gian giảm dần (mới nhất đến cũ nhất)
         const sortedTransactions = response.data.sort((a, b) => {

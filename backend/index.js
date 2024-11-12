@@ -29,7 +29,7 @@ if (err) {
     console.log('Connected to MySQL database.');
 });
 
-app.post('/signup', async (req, res) => {
+app.post('/api/signup', async (req, res) => {
   
     const { email, password, fullname, birthday, phone } = req.body;
     console.log('Received request:', req.body);
@@ -75,7 +75,7 @@ app.post('/signup', async (req, res) => {
 });
 
 // API: Đăng nhập
-app.post('/login', async (req, res) => {
+app.post('/api/login', async (req, res) => {
     const { email, password } = req.body;
     console.log('Received request:', req.body);
   
@@ -99,7 +99,7 @@ app.post('/login', async (req, res) => {
 });
 
 // API: Lấy thông tin người dùng từ bảng user và account
-app.get('/user-profile/:email', (req, res) => {
+app.get('/api/user-profile/:email', (req, res) => {
     const { email } = req.params;
     console.log('Received request:', req.params);
     const query = `
@@ -116,7 +116,7 @@ app.get('/user-profile/:email', (req, res) => {
     });
 });
 
-  app.post('/change-password', (req, res) => {
+  app.post('/api/change-password', (req, res) => {
     const { email, oldPassword, newPassword } = req.body;
     console.log('Received request:', req.body);
     // Tìm người dùng trong cơ sở dữ liệu theo email
@@ -148,7 +148,7 @@ app.get('/user-profile/:email', (req, res) => {
 });
 
 // API: Cập nhật thông tin người dùng
-app.post('/update-profile', (req, res) => {
+app.post('/api/update-profile', (req, res) => {
     console.log('Received request:', req.body);
     const { email, fullname, birthday, phone } = req.body;
   
@@ -166,7 +166,7 @@ app.post('/update-profile', (req, res) => {
 });
 
 // API: Lấy thông tin người dùng từ bảng user và account
-app.get('/admin/bank-account/:email', (req, res) => {
+app.get('/api/admin/bank-account/:email', (req, res) => {
     const { email } = req.params;
     console.log('Received request:', req.params);
     const query = `
@@ -185,7 +185,7 @@ app.get('/admin/bank-account/:email', (req, res) => {
 });
 
 // API: Cập nhật thông tin tài khoản admin
-app.post('/admin/update-bank', (req, res) => {
+app.post('/api/admin/update-bank', (req, res) => {
     console.log('Received request:', req.body);
     const { email, bank, stk, owner } = req.body;
   
@@ -216,7 +216,7 @@ app.post('/admin/update-bank', (req, res) => {
 });
 
 // API: Lấy danh sách products
-app.get('/admin/giftbox', (req, res) => {
+app.get('/api/admin/giftbox', (req, res) => {
     db.query('SELECT * FROM giftbox WHERE status IN ("Còn hàng", "Đã mua")', (err, results) => {
       if (err) return res.status(500).json({ message: 'Database error' });
       res.status(200).json(results);
@@ -224,7 +224,7 @@ app.get('/admin/giftbox', (req, res) => {
 });
 
 // API: Lấy danh sách products
-app.get('/shop/giftbox/:email', (req, res) => {
+app.get('/api/shop/giftbox/:email', (req, res) => {
   const { email } = req.params;
   const query = `
     SELECT g.*
@@ -256,10 +256,10 @@ const storage = multer.diskStorage({
 const upload = multer({ storage });
 
 // Cấu hình để phục vụ tệp tĩnh từ thư mục 'uploads'
-app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+app.use('/api/uploads', express.static(path.join(__dirname, 'uploads')));
 
   // Api tạo một chiến dịch mới
-app.post('/new-giftbox', upload.fields([{ name: 'image' }]), async (req, res) => {
+app.post('/api/new-giftbox', upload.fields([{ name: 'image' }]), async (req, res) => {
     console.log('Received request:', req.body);
     const { name, description, price, product, image, real_value } = req.body;
     const imagePath = req.files.image ? `/uploads/${req.files.image[0].filename}` : null;
@@ -282,7 +282,7 @@ app.post('/new-giftbox', upload.fields([{ name: 'image' }]), async (req, res) =>
 });
 
 // API: Cập nhật thông tin chiến dịch
-app.post('/edit-giftbox/:id', upload.fields([{ name: 'image' }]), (req, res) => {
+app.post('/api/edit-giftbox/:id', upload.fields([{ name: 'image' }]), (req, res) => {
     console.log('Received request:', req.body, req.params);
     const id = req.params.id;
     const { name, description, price, product, image, real_value } = req.body;
@@ -314,7 +314,7 @@ app.post('/edit-giftbox/:id', upload.fields([{ name: 'image' }]), (req, res) => 
     }
 });
 
-app.delete('/delete-giftbox/:id', (req, res) => {
+app.delete('/api/delete-giftbox/:id', (req, res) => {
     const { id } = req.params;
     db.query('DELETE FROM giftbox WHERE id = ?', [id], (err, result) => {
         if (err) return res.status(500).json({ message: 'Database error' });
@@ -326,7 +326,7 @@ app.delete('/delete-giftbox/:id', (req, res) => {
 });
 
 // API: Lấy thông tin người dùng từ bảng user và account
-app.get('/box-detail/:id', (req, res) => {
+app.get('/api/box-detail/:id', (req, res) => {
   const { id } = req.params;
   console.log('Received request:', req.params);
   const query = `
@@ -343,7 +343,7 @@ app.get('/box-detail/:id', (req, res) => {
   });
 });
 
-app.post('/add-to-cart', (req, res) => {
+app.post('/api/add-to-cart', (req, res) => {
   const { email, giftboxId } = req.body;
 
   const query = 'SELECT * FROM cart WHERE email = ?';
@@ -362,7 +362,7 @@ app.post('/add-to-cart', (req, res) => {
   });
 });
 
-app.get('/cart-items/:email', (req, res) => {
+app.get('/api/cart-items/:email', (req, res) => {
   const { email } = req.params;
   if (!email) {
       return res.status(400).json({ message: 'Email is required' });
@@ -394,7 +394,7 @@ app.get('/cart-items/:email', (req, res) => {
 
 });
 
-app.delete('/delete-cart-items/:id', (req, res) => {
+app.delete('/api/delete-cart-items/:id', (req, res) => {
   const itemId = req.params.id;
   console.log(req.params.id);
   db.query('Select cart_id FROM cart_items WHERE id = ?', [itemId], (err, results) => {
@@ -423,7 +423,7 @@ app.delete('/delete-cart-items/:id', (req, res) => {
   });
 });
 
-app.get('/user-balance/:email', (req, res) => {
+app.get('/api/user-balance/:email', (req, res) => {
   const { email } = req.params;
   console.log('Received request:', req.params);
   const query = `
@@ -440,7 +440,7 @@ app.get('/user-balance/:email', (req, res) => {
   });
 });
 
-app.post('/nap-tien', async (req, res) => {
+app.post('/api/nap-tien', async (req, res) => {
   console.log('Received request:', req.body);
   const { email, in_code, payment, content } = req.body;
   
@@ -462,7 +462,7 @@ app.post('/nap-tien', async (req, res) => {
   });
 });
 
-app.post('/rut-tien', async (req, res) => {
+app.post('/api/rut-tien', async (req, res) => {
   console.log('Received request:', req.body);
   const { email, bank, acc_number, owner, payment } = req.body;
   
@@ -484,7 +484,7 @@ app.post('/rut-tien', async (req, res) => {
   });
 });
 
-app.get('/ls-nap-tien/:email', (req, res) => {
+app.get('/api/ls-nap-tien/:email', (req, res) => {
   const { email } = req.params;
   console.log('Received request:', req.params);
   const query = `
@@ -499,7 +499,7 @@ app.get('/ls-nap-tien/:email', (req, res) => {
   });
 });
 
-app.get('/ls-rut-tien/:email', (req, res) => {
+app.get('/api/ls-rut-tien/:email', (req, res) => {
   const { email } = req.params;
   console.log('Received request:', req.params);
   const query = `
@@ -514,7 +514,7 @@ app.get('/ls-rut-tien/:email', (req, res) => {
   });
 });
 
-app.get('/admin/nap-tien', (req, res) => {
+app.get('/api/admin/nap-tien', (req, res) => {
   const query = `
     SELECT mi.*, u.fullname
     FROM money_in mi 
@@ -527,7 +527,7 @@ app.get('/admin/nap-tien', (req, res) => {
   });
 });
 
-app.post('/admin/update-nap-tien/:code', (req, res) => {
+app.post('/api/admin/update-nap-tien/:code', (req, res) => {
   console.log('Received request:', req.body, req.params);
   const code = req.params.code;
   const { status } = req.body;
@@ -573,7 +573,7 @@ app.post('/admin/update-nap-tien/:code', (req, res) => {
   db.execute(balance_query);
 });
 
-app.get('/admin/rut-tien', (req, res) => {
+app.get('/api/admin/rut-tien', (req, res) => {
   const query = `
     SELECT mo.*, u.fullname
     FROM money_out mo 
@@ -586,7 +586,7 @@ app.get('/admin/rut-tien', (req, res) => {
   });
 });
 
-app.post('/admin/update-rut-tien/:id', (req, res) => {
+app.post('/api/admin/update-rut-tien/:id', (req, res) => {
   console.log('Received request:', req.body, req.params);
   const id = req.params.id;
   const { status } = req.body;
@@ -633,14 +633,14 @@ app.post('/admin/update-rut-tien/:id', (req, res) => {
 });
 
 // API: Lấy danh sách người dùng
-app.get('/admin/user', (req, res) => {
+app.get('/api/admin/user', (req, res) => {
   db.query('SELECT * FROM user', (err, results) => {
     if (err) return res.status(500).json({ message: 'Database error' });
     res.status(200).json(results);
   });
 });
 
-app.post('/order', (req, res) => {
+app.post('/api/order', (req, res) => {
   const { email } = req.body;
 
   // Kiểm tra giỏ hàng của người dùng
@@ -699,7 +699,7 @@ app.post('/order', (req, res) => {
 });
 
 // API: Lấy danh sách products
-app.get('/box-order/:email', (req, res) => {
+app.get('/api/box-order/:email', (req, res) => {
   const email = req.params.email;
   db.query('SELECT * FROM giftbox WHERE status = "Đã mua" and email = ?',[email], (err, results) => {
     if (err) return res.status(500).json({ message: 'Database error' });
@@ -708,7 +708,7 @@ app.get('/box-order/:email', (req, res) => {
 });
 
 // API: Lấy danh sách products
-app.get('/box-open/:email', (req, res) => {
+app.get('/api/box-open/:email', (req, res) => {
   const email = req.params.email;
   db.query('SELECT * FROM giftbox WHERE status IN ("Đã mở", "Nhận vật phẩm", "Nhận tiền") and email = ?',[email], (err, results) => {
     if (err) return res.status(500).json({ message: 'Database error' });
@@ -716,7 +716,7 @@ app.get('/box-open/:email', (req, res) => {
   });
 });
 
-app.post('/open-gift/:id', (req, res) => {
+app.post('/api/open-gift/:id', (req, res) => {
   const id = req.params.id;
   const NgayMo = new Date().toISOString().slice(0, 10);
   const query = `
@@ -732,7 +732,7 @@ app.post('/open-gift/:id', (req, res) => {
   });
 });
 
-app.post('/received-gift/:id', (req, res) => {
+app.post('/api/received-gift/:id', (req, res) => {
   console.log('Received request:', req.body, req.params);
   const id = req.params.id;
   const { status } = req.body;
@@ -779,7 +779,7 @@ app.post('/received-gift/:id', (req, res) => {
 });
 
 // API: Lấy danh sách products
-app.get('/admin/box-order', (req, res) => {
+app.get('/api/admin/box-order', (req, res) => {
   const email = req.params.email;
   const query = `
     SELECT g.*, u.fullname

@@ -20,7 +20,7 @@ export default function LsRutTien() {
   useEffect(() => {	
     const fetchUserBalance = async () => {
       try {
-        const response = await axios.get(`http://localhost:5000/user-balance/${userEmail}`);
+        const response = await axios.get(`http://localhost:5000/api/user-balance/${userEmail}`);
         console.log(response.data);
         setUserBalance(response.data);
       } catch (error) {
@@ -29,7 +29,7 @@ export default function LsRutTien() {
     };
     const fetchTransactions = async () => {
       try {
-        const response = await axios.get(`http://localhost:5000/ls-rut-tien/${userEmail}`);
+        const response = await axios.get(`http://localhost:5000/api/ls-rut-tien/${userEmail}`);
         console.log(response.data);
         const sortedTransactions = response.data.sort((a, b) => {
           return moment(b.date, 'YYYY-MM-DD').valueOf() - moment(a.date, 'YYYY-MM-DD').valueOf();

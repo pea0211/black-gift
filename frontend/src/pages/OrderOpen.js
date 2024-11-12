@@ -20,7 +20,7 @@ export default function OrderOpen() {
     useEffect(() => {	
       const fetchData = async () => {
         try {
-          const response = await axios.get(`http://localhost:5000/box-open/${userEmail}`);
+          const response = await axios.get(`http://localhost:5000/api/box-open/${userEmail}`);
           console.log(response.data);
           // Sắp xếp các giao dịch theo thứ tự thời gian giảm dần (mới nhất đến cũ nhất)
           const sortedData = response.data.sort((a, b) => {
@@ -78,7 +78,7 @@ export default function OrderOpen() {
           status: updatedStatus
         }
         // Gửi yêu cầu cập nhật đến backend
-        const response = await axios.post(`http://localhost:5000/received-gift/${selectedOrder.id}`, {
+        const response = await axios.post(`http://localhost:5000/api/received-gift/${selectedOrder.id}`, {
           status: updatedStatus,
         });
   
@@ -112,7 +112,7 @@ export default function OrderOpen() {
     {
       title: 'Hình ảnh',
       dataIndex: 'image',
-      render: (text) => <img src={`http://localhost:5000${text}`} alt="Product" style={{ width: 50, height: 50 }} />,
+      render: (text) => <img src={`http://localhost:5000/api${text}`} alt="Product" style={{ width: 50, height: 50 }} />,
     },
     { title: 'Giá trị vật phẩm (VNĐ)', dataIndex: 'real_value', key: 'real_value',
        render: (value) => {

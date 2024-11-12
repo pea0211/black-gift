@@ -16,7 +16,7 @@ export default function Cart() {
         // Giả sử bạn gọi API để lấy dữ liệu giỏ hàng từ backend
         const fetchCartItems = async () => {
             try {
-                const response = await axios.get(`http://localhost:5000/cart-items/${userEmail}`); // Thay bằng email của người dùng đăng nhập
+                const response = await axios.get(`http://localhost:5000/api/cart-items/${userEmail}`); // Thay bằng email của người dùng đăng nhập
                 setCartItems(response.data.cartItems);
                 setTotalAmount(response.data.totalAmount);
             } catch (error) {
@@ -29,7 +29,7 @@ export default function Cart() {
 
     const handleRemoveItem = async (product) => {
         try {
-			await axios.delete(`http://localhost:5000/delete-cart-items/${product.id}`);
+			await axios.delete(`http://localhost:5000/api/delete-cart-items/${product.id}`);
             setCartItems(cartItems.filter(item => item.id !== product.id));
             setTotalAmount(totalAmount - product.price);
             //window.location.reload();
@@ -49,7 +49,7 @@ export default function Cart() {
     };
     const handleOrder = async () => {
         try {
-            const response = await axios.post('http://localhost:5000/order', { email: userEmail });
+            const response = await axios.post('http://localhost:5000/api/order', { email: userEmail });
             alert(response.data.message);
             navigate("/da-mua");
         } catch (error) {

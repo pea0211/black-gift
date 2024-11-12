@@ -18,7 +18,7 @@ export default function Shop() {
     useEffect(() => {
         const fetchProducts = async () => {
           try {
-            const response = await axios.get(`http://localhost:5000/shop/giftbox/${userEmail}`);
+            const response = await axios.get(`http://localhost:5000/api/shop/giftbox/${userEmail}`);
             console.log(response.data);
             setProducts(response.data);
 
