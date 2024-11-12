@@ -18,8 +18,8 @@ export default function Shop() {
     const navigate = useNavigate();
     useEffect(() => {
         // Kiểm tra token trong localStorage
-        const isLoggedIn = localStorage.getItem('isLoggedIn');
-        if (isLoggedIn == 'false') {
+        const isLoggedIn = localStorage.getItem('userEmail');
+        if (!isLoggedIn) {
             // Nếu không có token, chuyển hướng về trang đăng nhập
             navigate('/dang-nhap');
         }
