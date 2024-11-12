@@ -6,6 +6,7 @@ import bannerBg from '../img/banner-bg.jpg'
 import axios from "axios";
 
 export default function OpenGift() {
+    const navigate = useNavigate();
     useEffect(() => {
         // Kiểm tra token trong localStorage
         const isLoggedIn = localStorage.getItem('userEmail');

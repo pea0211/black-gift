@@ -7,6 +7,7 @@ import { Link, useNavigate } from "react-router-dom";
 const { Option } = Select;
 
 export default function Product() {
+    const navigate = useNavigate();
     useEffect(() => {
         // Kiểm tra token trong localStorage
         const isLoggedIn = localStorage.getItem('userEmail');

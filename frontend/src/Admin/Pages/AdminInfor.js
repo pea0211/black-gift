@@ -8,6 +8,7 @@ const { Title } = Typography;
 const { Option } = Select;
 
 export default function AdminInfor() {
+  const navigate = useNavigate();
   useEffect(() => {
     // Kiểm tra token trong localStorage
     const isLoggedIn = localStorage.getItem('userEmail');

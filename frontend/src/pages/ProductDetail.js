@@ -5,6 +5,7 @@ import boxDefine from '../img/dong.png'
 import axios from "axios";
 
 export default function ProductDetail() {
+	const navigate = useNavigate();
 	useEffect(() => {
         // Kiểm tra token trong localStorage
         const isLoggedIn = localStorage.getItem('userEmail');

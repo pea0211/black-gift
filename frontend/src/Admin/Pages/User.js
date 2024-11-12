@@ -3,8 +3,10 @@ import { Table, Modal, Button, Select, Input, Pagination } from 'antd';
 import { useEffect } from "react";
 import axios from "axios";
 const { Option } = Select;
+import { useNavigate } from "react-router-dom";
 
 export default function User() {
+    const navigate = useNavigate();
     useEffect(() => {
         // Kiểm tra token trong localStorage
         const isLoggedIn = localStorage.getItem('userEmail');
