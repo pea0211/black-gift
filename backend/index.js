@@ -682,7 +682,11 @@ app.post('/api/order', (req, res) => {
                       if (err) return res.status(500).json({ message: 'Database error' });
 
                       // Xóa các mục đã mua khỏi bảng cart_items và cập nhật giỏ hàng
-                      db.query('DELETE FROM cart_items WHERE cart_id = ?', [cartId], (err) => {
+                      const updateCartQuery = `DELETE ci
+                                              FROM cart_items ci
+                                              JOIN giftbox g ON ci.giftbox_id = g.id
+                                              WHERE g.status IN ('Đã mua', 'Đã mở','Nhận tiền','Nhận vật phẩm')`
+                      db.query(updateCartQuery, [cartId], (err) => {
                           if (err) return res.status(500).json({ message: 'Database error' });
 
                           db.query('UPDATE cart SET total_amount = 0 WHERE id = ?', [cartId], (err) => {
