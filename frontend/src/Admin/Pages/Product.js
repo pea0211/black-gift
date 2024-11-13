@@ -272,7 +272,7 @@ export default function Product() {
                         },
                         {
                             title: 'Hành Động',
-                            render: (text, record) => (
+                            /*render: (text, record) => (
                                 <div style={{ display: 'flex', gap: '8px' }}>
                                     <Button type="primary" size="small" onClick={() => handleOpenEditModal(record)}>
                                         Chỉnh sửa
@@ -281,7 +281,28 @@ export default function Product() {
                                         Xóa
                                     </Button>
                                 </div>
-                            ),
+                            ),*/
+                            render: (text, record) => (
+                                <div style={{ display: 'flex', gap: '8px' }}>
+                                    <Button 
+                                        type="primary" 
+                                        size="small" 
+                                        onClick={() => handleOpenEditModal(record)}
+                                    >
+                                        Chỉnh sửa
+                                    </Button>
+                                    {record.status === "Còn hàng" && (
+                                        <Button 
+                                            type="default" 
+                                            danger 
+                                            size="small" 
+                                            onClick={() => handleDelete(record.id)}
+                                        >
+                                            Xóa
+                                        </Button>
+                                    )}
+                                </div>
+                            )
                         },
                     ]}
                     rowKey="id"
