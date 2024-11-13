@@ -1,3 +1,5 @@
+/* 15.235.155.26:22/root/Cn&Y3^ccK6 */
+
 Create database black_gift;
 use black_gift;
 

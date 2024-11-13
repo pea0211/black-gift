@@ -12,9 +12,10 @@ export default function AdminInfor() {
   useEffect(() => {
     // Kiểm tra token trong localStorage
     const isLoggedIn = localStorage.getItem('userEmail');
-    if (!isLoggedIn) {
-        // Nếu không có token, chuyển hướng về trang đăng nhập
-        navigate('/dang-nhap');
+    const role = localStorage.getItem('role');
+    if (!isLoggedIn || role !== 'admin') {
+      // Nếu không có token, chuyển hướng về trang đăng nhập
+      navigate('/dang-nhap');
     }
 }, []);
   const handleSubmit = (values) => {

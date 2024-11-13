@@ -1,8 +1,25 @@
 import React, { useState } from 'react';
 import logo from '../img/logo.png'; // Đảm bảo logo đúng đường dẫn
 import { Link, useNavigate } from 'react-router-dom';
+import { useEffect } from "react";
+import axios from "axios";
 const Header = () => {
   const navigate = useNavigate();
+  const [userBalance, setUserBalance] = useState("");
+  const userEmail = localStorage.getItem("userEmail");
+  useEffect(() => {	
+    const fetchUserBalance = async () => {
+      try {
+        const response = await axios.get(`http://15.235.155.26:5000/api/user-balance/${userEmail}`);
+        console.log(response.data);
+        setUserBalance(response.data);
+      } catch (error) {
+        console.error("Error fetching user data:", error);
+      }
+    };
+
+    fetchUserBalance();
+	}, []);
   const handleLogout = () => {
     localStorage.setItem("isLoggedIn", "false"); // Lưu trạng thái đăng nhập vào localStorage
     localStorage.setItem("role", ""); // Lưu vai trò vào localStorage
@@ -96,7 +113,7 @@ const Header = () => {
                     aria-expanded={isMoneyMenuOpen ? 'true' : 'false'}
                     onClick={toggleMoneyMenu} // Toggle "Ví tiền"
                   >
-                    Ví tiền
+                    Ví tiền: {Number(userBalance.balance).toLocaleString('vi-VN').replace(/\./g, ',')} VNĐ
                   </a>
                   <ul className={`dropdown-menu ${isMoneyMenuOpen ? 'show' : ''}`}>
                     <li><Link to="/money-man">Lịch sử nạp tiền</Link></li>
@@ -108,6 +125,7 @@ const Header = () => {
               </ul>
 
               {/* Menu "Đơn hàng" với submenu */}
+
               <ul className="navbar-nav justify-content-end">
                 <li className={`dropdown submenu ${isOrderMenuOpen ? 'show' : ''}`}>
                   <a
